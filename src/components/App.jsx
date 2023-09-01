@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { RotatingLines } from 'react-loader-spinner';
-
-import { Container } from './Container.styled';
+import { GlobalStyle } from './GlobalStyle';
 import { Searchbar } from './Searchbar/Searchbar';
-
-axios.defaults.baseURL = 'https://pixabay.com/api/';
-
-// onSubmit={}
+import { ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 export class App extends Component {
-  // const API_KEY = '37960229-568719668cd9d6c687eddc6ce';
-  render() {
-    return (
-      <Container>
-        <Searchbar />
+  state = {
+    searchQuery: '',
+  };
 
-        <RotatingLines
-          strokeColor="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          width="96"
-          visible={true}
-        />
-      </Container>
+  handleSubmit = searchQuery => {
+    this.setState({ searchQuery });
+  };
+
+  render() {
+    const { searchQuery } = this.state;
+
+    return (
+      <>
+        <Searchbar onSubmit={this.handleSubmit} />
+        <ImageGallery value={searchQuery} />
+        <ToastContainer transition={Slide} draggablePercent={60} />
+        <GlobalStyle />
+      </>
     );
   }
 }
