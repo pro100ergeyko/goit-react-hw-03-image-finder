@@ -1,13 +1,13 @@
 import { ListItem, Picture } from './ImageGalleryItem.styled';
 
-export const ImageGalleryItem = ({ item, onImageClick }) => {
+export const ImageGalleryItem = ({ item, onClick }) => {
   const { largeImageURL, tags, webformatURL } = item;
 
   return (
     <ListItem
       onClick={e => {
         e.preventDefault();
-        onImageClick({ largeImageURL, tags });
+        onClick({ largeImageURL, tags });
       }}
     >
       <div>
